@@ -47,7 +47,7 @@ func CreateToken(key *rsa.PrivateKey, id string) (*Token, *TokenError) {
 }
 
 func ParseToken(tokenString string) (*Token, *TokenError) {
-	parts := strings.Split(tokenString, "&")
+	parts := strings.Split(tokenString, ".")
 
 	if len(parts) != 2 {
 		return nil, &TokenError{"Tokenが不正です", nil}
@@ -90,7 +90,7 @@ func (t *Token) GetTokenString() string {
 	parts[0] = makeEncodeParams(t.Id, t.Expiration)
 	parts[1] = t.Signature
 
-	return strings.Join(parts[:], "&")
+	return strings.Join(parts[:], ".")
 }
 
 func (t *Token) IsValid(key *rsa.PublicKey) *TokenError {

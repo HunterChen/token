@@ -19,6 +19,7 @@ const (
 var (
 	privateKey *rsa.PrivateKey
 	publicKey  *rsa.PublicKey
+	tokenString string
 )
 
 func TestMain(m *testing.M) {
@@ -40,7 +41,7 @@ func TestMain(m *testing.M) {
 	os.Exit(ret)
 }
 
-func TestToken(t *testing.T) {
+func TestCreateToken(t *testing.T) {
 	token, err := ts.CreateToken(privateKey, "123456789012345678901234567890123456")
 	if err != nil {
 		t.Error(err)
@@ -52,8 +53,11 @@ func TestToken(t *testing.T) {
 		return
 	}
 
-	tokenString := token.GetTokenString()
+	tokenString = token.GetTokenString()
+	t.Log(tokenString)
+}
 
+func TestIsValid(t *testing.T) {
 	parseToken, err := ts.ParseToken(tokenString)
 	if err != nil {
 		t.Error(err)
