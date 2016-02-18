@@ -27,7 +27,7 @@ type TokenError struct {
 var hash = crypto.SHA256
 
 func CreateToken(key *rsa.PrivateKey, id string) (*Token, *TokenError) {
-	expiration := time.Now().Add(time.Hour + tokenDuration).Unix()
+	expiration := time.Now().Add(time.Hour * tokenDuration).Unix()
 
 	encodeParams := makeEncodeParams(id, expiration)
 
