@@ -8,7 +8,7 @@ import (
 	"os"
 	"testing"
 
-	ts "gitlab.beihan.local/MamoruIzuka/token"
+	ts "github.com/jaybgo/token"
 )
 
 const (
